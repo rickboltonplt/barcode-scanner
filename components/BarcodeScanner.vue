@@ -73,7 +73,7 @@ export default {
 
                     if (this.confirmations === 3) {
                         this.barcode = this.unconfirmedBarcode
-                        window.location = `${process.env.SAMPLE_APP_URL}/samples/${this.barcode}`
+                        window.location = `${env.sampleAppUrl}/samples/${this.barcode}`
                         this.reset()
                     }
                 }

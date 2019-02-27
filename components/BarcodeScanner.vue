@@ -22,7 +22,9 @@ export default {
   data() {
     return {
       scanning: false,
-      barcode: null
+      barcode: null,
+      unconfirmedBarcode: null,
+      confirmations: 0
     }
   },
 
@@ -64,19 +66,26 @@ export default {
       Quagga.onProcessed(result => {
         if (result) {
           if (result.codeResult && result.codeResult.code) {
-            this.barcode = result.codeResult.code
-            this.scanning = false
-            Quagga.stop()
+            if (result.codeResult.code === this.unconfirmedBarcode) {
+              this.confirmations++
+            }
+
+            this.unconfirmedBarcode = result.codeResult.code
+
+            if (this.confirmations === 3) {
+              this.barcode = this.unconfirmedBarcode
+              this.stopScanning()
+            }
           }
         }
       })
     },
 
     stopScanning() {
-      if (this.scanning) {
-        Quagga.stop()
-        this.scanning = false
-      }
+      Quagga.stop()
+      this.scanning = false
+      this.confirmations = 0
+      this.unconfirmedBarcode = null
     }
   }
 }

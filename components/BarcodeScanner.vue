@@ -1,23 +1,5 @@
 <template>
   <div>
-    <label>
-      <span>Barcode-Type</span>
-      <select v-model="decoderType">
-        <option value="code_128">Code 128</option>
-        <option value="code_39">Code 39</option>
-        <option value="code_39_vin">Code 39 VIN</option>
-        <option value="ean">EAN</option>
-        <option value="ean_extended">EAN-extended</option>
-        <option value="ean_8">EAN-8</option>
-        <option value="upc">UPC</option>
-        <option value="upc_e">UPC-E</option>
-        <option value="codabar">Codabar</option>
-        <option value="i2of5">Interleaved 2 of 5</option>
-        <option value="2of5">Standard 2 of 5</option>
-        <option value="code_93">Code 93</option>
-      </select>
-    </label>
-
     <span class="text-2xl">{{ barcode }}</span>
     <button
       class="bg-blue hover:bg-blue-dark text-white font-bold py-2 px-4 rounded"
@@ -40,7 +22,6 @@ export default {
   data() {
     return {
       scanning: false,
-      decoderType: 'code_128',
       barcode: null
     }
   },
@@ -67,7 +48,7 @@ export default {
             target: this.$refs.stream
           },
           decoder: {
-            readers: [`${this.decoderType}_reader`]
+            readers: ['ean_reader']
           }
         },
         err => {
@@ -96,12 +77,6 @@ export default {
         Quagga.stop()
         this.scanning = false
       }
-    }
-  },
-
-  watch: {
-    decoderType() {
-      this.scanBarcode()
     }
   }
 }

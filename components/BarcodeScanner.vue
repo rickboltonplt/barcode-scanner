@@ -74,7 +74,7 @@ export default {
 
                         if (this.confirmations === 3) {
                             this.barcode = this.unconfirmedBarcode
-                            window.location = `https://96dd22b6.ngrok.io/samples/${this.barcode}`
+                            window.location = `http://96dd22b6.ngrok.io/samples/${this.barcode}`
                             this.reset()
                         }
                     }

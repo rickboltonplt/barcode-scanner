@@ -53,9 +53,5 @@ module.exports = {
     ** You can extend webpack config here
     */
     extend(config, ctx) {}
-  },
-
-  env: {
-    sampleAppUrl: process.env.SAMPLE_APP_URL || 'http://localhost:3000'
   }
 }

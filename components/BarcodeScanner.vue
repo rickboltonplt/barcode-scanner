@@ -64,19 +64,17 @@ export default {
             )
 
             Quagga.onProcessed(result => {
-                if (result) {
-                    if (result.codeResult && result.codeResult.code) {
-                        if (result.codeResult.code === this.unconfirmedBarcode) {
-                            this.confirmations++
-                        }
+                if (result && result.codeResult && result.codeResult.code) {
+                    if (result.codeResult.code === this.unconfirmedBarcode) {
+                        this.confirmations++
+                    }
 
-                        this.unconfirmedBarcode = result.codeResult.code
+                    this.unconfirmedBarcode = result.codeResult.code
 
-                        if (this.confirmations === 3) {
-                            this.barcode = this.unconfirmedBarcode
-                            window.location = `http://96dd22b6.ngrok.io/samples/${this.barcode}`
-                            this.reset()
-                        }
+                    if (this.confirmations === 3) {
+                        this.barcode = this.unconfirmedBarcode
+                        window.location = `http://5eeee85e.ngrok.io/samples/${this.barcode}`
+                        this.reset()
                     }
                 }
             })
